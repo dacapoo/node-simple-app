@@ -7,10 +7,21 @@ app.get('/track', (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const timestamp = new Date().toISOString();
 
-    console.log( `${timestamp} - ${ip}\n`);
+    // Log the tracking details
+    console.log(`${timestamp} - IP: ${ip}`);
 
-    // Redirect to the destination URL
-    res.redirect('https://your-landing-page.com');  // Replace with your desired URL
+    // Send a 1x1 transparent PNG as a response
+    const pixel = Buffer.from(
+        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgcB4kfECXcAAAAASUVORK5CYII=',
+        'base64'
+    );
+
+    res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': pixel.length,
+    });
+
+    res.end(pixel);
 });
 
 app.listen(port, () => {

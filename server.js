@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const app = express();
 const port = 3000;
 
@@ -8,8 +7,7 @@ app.get('/track', (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const timestamp = new Date().toISOString();
 
-    // Log the IP and timestamp
-    fs.appendFileSync('clicks.log', `${timestamp} - ${ip}\n`);
+    console.log( `${timestamp} - ${ip}\n`);
 
     // Redirect to the destination URL
     res.redirect('https://your-landing-page.com');  // Replace with your desired URL

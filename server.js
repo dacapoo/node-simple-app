@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/check', (req, res) => {
+app.get('/track', (req, res) => {
     // Get the real IP address from X-Forwarded-For header or use req.ip
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const timestamp = new Date().toISOString();

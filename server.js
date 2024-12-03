@@ -24,6 +24,17 @@ app.get('/track', (req, res) => {
     res.end(pixel);
 });
 
+app.get('/redirect', (req, res) => {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const timestamp = new Date().toISOString();
+
+    // Log the tracking details
+    console.log(`${timestamp} - IP: ${ip}`);
+
+    // Redirect the user
+    res.redirect('https://www.kleinanzeigen.de/stadt/regensburg/');
+});
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
